@@ -1,0 +1,28 @@
+.movie-row {
+  padding: 2rem 2rem 0 2rem;
+}
+
+.movie-row h2 {
+  font-size: 2rem;          /* más grande */
+  font-weight: 700;         /* más grueso */
+  color: #ffffff;
+  margin-bottom: 2.5rem; 
+  padding-left: 4px;
+  border-left: 5px solid #a259ff; /* estilo decorativo */
+}
+
+.row-scroll {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+.row-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.row-scroll::-webkit-scrollbar-thumb {
+  background-color: #333;
+  border-radius: 3px;
+}
