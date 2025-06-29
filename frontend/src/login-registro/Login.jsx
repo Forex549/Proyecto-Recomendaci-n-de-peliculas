@@ -1,13 +1,45 @@
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
+import { toast } from 'react-toastify';
+
 
 export const Login = () => {
   const navigate = useNavigate();
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aquí luego puedes hacer validación o llamada a backend
-    navigate('/home');
+
+    const email = emailRef.current.value.trim();
+    const password = passwordRef.current.value;
+
+    if (!email || !password) {
+      toast.warning("Por favor completa todos los campos");
+      return;
+    }
+
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email:email, password :password })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        localStorage.setItem("uid", data.uid);
+        localStorage.setItem("nombreUsuario", data.nombre);
+        toast.success("Inicio de sesión exitoso");
+        navigate("/home");
+      } else {
+        toast.error(data.error || "Credenciales incorrectas");
+      }
+    } catch (err) {
+      toast.error("Error al iniciar sesión: " + err.message);
+    }
   };
 
   return (
@@ -18,10 +50,10 @@ export const Login = () => {
         <p>Ingresa tus datos para acceder</p>
 
         <label htmlFor="email">Correo</label>
-        <input type="email" id="email" placeholder="correo@ejemplo.com" />
+        <input type="email" id="email" placeholder="correo@ejemplo.com" ref={emailRef} />
 
         <label htmlFor="password">Contraseña</label>
-        <input type="password" id="password" placeholder="●●●●●●●" />
+        <input type="password" id="password" placeholder="●●●●●●●" ref={passwordRef}/>
 
         <button type="submit" onClick={handleSubmit}>Ingresar</button>
 
