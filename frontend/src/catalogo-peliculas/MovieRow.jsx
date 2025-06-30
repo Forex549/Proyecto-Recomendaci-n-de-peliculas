@@ -24,12 +24,12 @@ const sampleMovies = [
   },
 ];
 
-const MovieRow = ({ title }) => {
+const MovieRow = ({ title,peliculas }) => {
   return (
     <div className="movie-row">
       <h2 className="genre-title">{title}</h2>
       <div className="row-scroll">
-        {sampleMovies.map((movie, idx) => (
+        {peliculas.map((movie, idx) => (
           <MovieCard key={idx} movie={movie} />
         ))}
       </div>

@@ -1,0 +1,41 @@
+.ver-container {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  color: white;
+  background-color: #111;
+  min-height: 100vh;
+}
+
+.poster-ver {
+  max-width: 250px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255,255,255,0.1);
+}
+
+.info-ver {
+  max-width: 700px;
+  line-height: 1.5;
+}
+
+.info-ver h1 {
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.info-ver p {
+  margin: 0.3rem 0;
+}
+
+.info-ver .btn-ver {
+  margin-top: 2rem;
+  padding: 10px 20px;
+  background-color: #7c3aed;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}

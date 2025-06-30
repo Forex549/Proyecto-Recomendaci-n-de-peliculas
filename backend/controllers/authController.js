@@ -2,6 +2,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } f
 import { app, db } from '../firebase/config.js';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { collection, getDocs } from 'firebase/firestore';
+import { updateDoc } from 'firebase/firestore';
 
 
 const auth = getAuth(app);
@@ -86,3 +87,35 @@ export const getAllPeliculas = async (req, res) => {
     res.status(500).json({ error: 'Error al obtener películas', detalle: error.message });
   }
 };
+
+export const marcarPeliculaVista = async (req, res) => {
+  const { uid, pelicula } = req.body;
+
+  try {
+    const userRef = doc(db, 'usuarios', uid);
+    const snap = await getDoc(userRef);
+    if (!snap.exists()) return res.status(404).json({ error: 'Usuario no encontrado' });
+
+    const user = snap.data();
+    const vistas = user.peliculas_vistas || [];
+
+    if (vistas.includes(pelicula.id)) {
+      return res.status(200).json({ message: 'Película ya marcada como vista' });
+    }
+
+    const nuevoVector = pelicula.vector;
+    const anterior = user.gustos_vector || Array(nuevoVector.length).fill(0);
+
+    const actualizado = anterior.map((v, i) => (v + nuevoVector[i]) / 2);
+
+    await updateDoc(userRef, {
+      peliculas_vistas: [...vistas, pelicula.id],
+      gustos_vector: actualizado,
+    });
+
+    res.status(200).json({ message: 'Actualizado correctamente' });
+  } catch (err) {
+    res.status(500).json({ error: 'Error al actualizar gustos', detalle: err.message });
+  }
+};
+
