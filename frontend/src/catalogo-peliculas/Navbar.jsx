@@ -26,7 +26,7 @@ const Navbar = () => {
       </div>
 
       <div className="nav-buttons">
-        <FaProjectDiagram className="icon" title="Grafo" />
+        <FaProjectDiagram className="icon" title="Grafo" onClick={() =>{navigate('/grafo')}} />
         <FiLogOut className="icon" title="Salir" onClick={handleLogout} />
       </div>
     </nav>

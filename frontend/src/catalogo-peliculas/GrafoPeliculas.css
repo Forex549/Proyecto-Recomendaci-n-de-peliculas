@@ -1,0 +1,16 @@
+.grafo-container {
+  padding: 20px;
+  background-color: #0c0c0c;
+  color: white;
+  height: 100vh;
+}
+
+.btn-volver {
+  background-color: #e53935;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}

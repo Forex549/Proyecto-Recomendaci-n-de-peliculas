@@ -7,6 +7,7 @@ import VerPelicula from './catalogo-peliculas/VerPelicula';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import GrafoPeliculas from './catalogo-peliculas/GrafoPeliculas';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/registro" element={<Registro />} />
         <Route path="/home" element={<Home />} />
         <Route path="/ver/:id" element={<VerPelicula />} />
+        <Route path="/grafo" element={<GrafoPeliculas />} />
       </Routes>
 
       {/* Toast container global */}
