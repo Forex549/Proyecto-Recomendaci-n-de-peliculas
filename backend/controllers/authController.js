@@ -7,14 +7,14 @@ import { updateDoc } from 'firebase/firestore';
 
 const auth = getAuth(app);
 
-// Registro de usuario
+
 export const registerUser = async (req, res) => {
   const { email, password, nombre, fechaNacimiento } = req.body;
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const uid = userCredential.user.uid;
 
-    // Crear documento del usuario en Firestore
+   
     await setDoc(doc(db, 'usuarios', uid), {
       nombre,
       correo: email,
@@ -56,7 +56,7 @@ export const loginUser = async (req, res) => {
     const userData = userDoc.data();
     res.status(200).json(userData);
   } catch (error) {
-    // 🔽 Manejo claro de errores
+    
     switch (error.code) {
       case 'auth/invalid-email':
         return res.status(400).json({ error: 'Correo inválido' });
