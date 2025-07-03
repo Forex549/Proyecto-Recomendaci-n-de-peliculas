@@ -33,7 +33,7 @@ export const Registro = () => {
       return;
     }
 
-    // Aquí llamas al backend
+   
     try {
       const res = await fetch('http://localhost:5000/api/auth/register', {
         method: 'POST',
