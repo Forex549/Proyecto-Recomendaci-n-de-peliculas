@@ -4,9 +4,9 @@ import MovieRow from './MovieRow';
 import { useEffect, useState } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase/config';
-import { SeleccionarGeneros } from './SeleccionarGeneros'; // asegúrate que la ruta sea correcta
+import { SeleccionarGeneros } from './SeleccionarGeneros'; 
 import { obtenerRecomendaciones } from '../utils/knn';
-import DistanciaDebug from './DistanciaDebug'; // ruta relativa
+import DistanciaDebug from './DistanciaDebug'; 
 
 
 
@@ -54,7 +54,7 @@ export const Home = () => {
     fetchPeliculas();
   }, []);
 
-  // 🔍 Filtrar películas cada vez que cambie el texto de búsqueda
+
   useEffect(() => {
     const term = busqueda.trim().toLowerCase();
     if (term === '') {
@@ -83,7 +83,7 @@ export const Home = () => {
         const esNuevo = vector.length === 0 || vector.every(v => v === 0);
         setMostrarSelector(esNuevo);
 
-        // ✅ Solo generamos recomendaciones si NO es nuevo y ya tenemos películas cargadas
+        
         if (!esNuevo && peliculas.length > 0) {
           const vistas = data.peliculas_vistas || [];
 
@@ -99,7 +99,7 @@ export const Home = () => {
   };
 
   cargarUsuario();
-}, [peliculas]); // 👈 importante: depende de que ya estén cargadas las películas
+}, [peliculas]); 
 
 
   if (mostrarSelector && usuario) {
@@ -109,7 +109,7 @@ export const Home = () => {
   return (
     <div className="home-container">
       <Navbar />
-            {/* Botón para mostrar/ocultar el panel de distancias */}
+            
       <div style={{ textAlign: 'center', marginTop: '1rem' }}>
         <button
           className="btn-debug"
@@ -119,12 +119,12 @@ export const Home = () => {
         </button>
       </div>
 
-      {/* Panel de distancias (solo si se activa el botón) */}
+      
       {mostrarDebug && usuario && peliculas.length > 0 && (
         <DistanciaDebug usuarioVector={usuario.gustos_vector} peliculas={peliculas} />
       )}
 
-      {/* 🔍 Input de búsqueda */}
+      
       <div style={{ textAlign: 'center', marginTop: '1rem' }}>
         <input
           type="text"
@@ -141,7 +141,7 @@ export const Home = () => {
         />
       </div>
 
-      {/* 🎯 Mostrar resultados de búsqueda si hay */}
+     
       {resultados.length > 0 ? (
         <MovieRow title={`Resultados para "${busqueda}"`} peliculas={resultados} />
         ) : (
