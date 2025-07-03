@@ -39,10 +39,10 @@ export const SeleccionarGeneros = ({ usuario, onListo }) => {
   const voto = 0.5;
   const duracion = 0.5;
 
-  // Supón que prefieren pelis recientes
+  
   const año = [0, 0, 0, 1];
 
-  return [...promedio, popularidad, voto, duracion, ...año]; // 19 + 3 + 4 = 26
+  return [...promedio, popularidad, voto, duracion, ...año]; 
 };
 
   const guardarPreferencias = async () => {
@@ -57,7 +57,7 @@ export const SeleccionarGeneros = ({ usuario, onListo }) => {
       const ref = doc(db, 'usuarios', usuario.uid);
       await updateDoc(ref, { gustos_vector: vector });
 
-      if (onListo) onListo(); // para volver a la vista principal
+      if (onListo) onListo();
     } catch (err) {
       alert("Error al guardar preferencias: " + err.message);
     }
