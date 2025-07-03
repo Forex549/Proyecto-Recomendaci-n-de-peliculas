@@ -20,7 +20,7 @@ const DistanciaDebug = ({ usuarioVector, peliculas }) => {
 
   return (
     <div className="debug-panel">
-      <h3>🧠 Vector del usuario</h3>
+      <h3> Vector del usuario</h3>
       <p>{usuarioVector.map(v => v.toFixed(2)).join(', ')}</p>
 
       <h3>📏 Distancias a cada película:</h3>
